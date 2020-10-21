@@ -39,9 +39,37 @@ func main() {
 
 	//查询
 	one, err := getOne(1001)
+	// apps, err := getMany(1)
 	if err != nil {
 		log.Fatal(err.Error())
 	}
 	fmt.Println(one)
+	// fmt.Println(apps)
 
+	//更新
+	one.name += " new"
+	one.order++
+	err = one.Update()
+	if err != nil {
+		log.Fatalln(err.Error())
+	}
+	a1, _ := getOne(1001)
+	fmt.Println(a1)
+
+	//插入
+	newOne := app{
+		ID:     1004,
+		name:   "TestInsert",
+		order:  1124,
+		level:  10,
+		status: 1,
+	}
+
+	err = newOne.Insert()
+	if err != nil {
+		log.Fatalln(err.Error())
+	}
+
+	a2, _ := getOne(newOne.ID)
+	fmt.Println(a2)
 }
